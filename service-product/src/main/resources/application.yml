@@ -1,36 +1,48 @@
 #spring.cloud.config.enabled= false
 #spring.jpa.defer-datasource-initialization: true
 
-cloud:
-  config:
-    enable: false
+spring.config.import: "configserver:http://localhost:8081"
 
-server:
-  port: 8091
 spring:
-  h2:
-    console:
+  application:
+    name: service-product
+  cloud:
+    config:
       enable: true
+      uri: http://localhost:8081
+      username: root
+      password: s3cr3t
 
-    datasource:
-      url: jdbc:h2:mem:productoDB;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-      driverClassName: org.h2.Driver
-      platform: h2
-      username: sa
-      password:
-
-  jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: update
-    database-platform: org.hibernate.dialect.H2Dialect
-    properties:
-      hibernate:
-        show_sql: true
-        use_sql_comments: false
-        format_sql: false
-    defer-datasource-initialization: true
-
-  logging:
-    pattern:
-      console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"
+#cloud:
+#  config:
+#    enable: false
+#
+#server:
+#  port: 8091
+#spring:
+#  h2:
+#    console:
+#      enable: true
+#
+#    datasource:
+#      url: jdbc:h2:mem:productoDB;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+#      driverClassName: org.h2.Driver
+#      platform: h2
+#      username: sa
+#      password:
+#
+#  jpa:
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: update
+#    database-platform: org.hibernate.dialect.H2Dialect
+#    properties:
+#      hibernate:
+#        show_sql: true
+#        use_sql_comments: false
+#        format_sql: false
+#    defer-datasource-initialization: true
+#
+#  logging:
+#    pattern:
+#      console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"
